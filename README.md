@@ -67,6 +67,8 @@ n8n-image-generator-bot/
 ├── LICENSE
 └── README.md
 ```text
+...
+
 
 ---
 
