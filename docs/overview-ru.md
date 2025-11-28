@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="../assets/n8n-image-generator-bot-logo.svg" alt="n8n image generator bot logo" width="180">
+</p>
+
+
 # Обзор проекта (RU)
 
 ## 1. Описание проекта
