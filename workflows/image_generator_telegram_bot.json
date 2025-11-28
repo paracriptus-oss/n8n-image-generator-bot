@@ -1,0 +1,460 @@
+{
+  "name": "Image Generator Telegram Bot AI",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cabe9343-b338-42db-82f1-9dfc902cc989",
+      "name": "Telegram Trigger",
+      "webhookId": "68898316-f1f7-4408-bbf4-1f4355fe431f",
+      "credentials": {
+        "telegramApi": {
+          "id": "auc1IHwoB9MuIeWh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "57549a21-e3a5-45f7-9ae0-d76fe886aa33",
+              "name": "message.text",
+              "value": "={{ $json?.message?.text ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "f4967744-ece0-40c3-8694-01a77e047f0e",
+              "name": "massage.action",
+              "value": "={{ $json.message.text.split(' ')[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        0
+      ],
+      "id": "67667e87-4b03-4d2b-89da-2d60833c804b",
+      "name": "PreProcessing"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a3e91dfd-5ce6-4c62-a057-6a27191508a8",
+              "name": "model_temperature",
+              "value": 0.8,
+              "type": "number"
+            },
+            {
+              "id": "b44db83c-1bf7-4cb6-84bc-de8e8f3ce1dd",
+              "name": "token_length",
+              "value": 500,
+              "type": "number"
+            },
+            {
+              "id": "3bb40b0c-e18c-419a-9360-7aec7804978f",
+              "name": "system_command",
+              "value": "Ты — дружелюбный чат-бот. Имя пользователя — {{ $json?.massage?.from?.first_name }}.\nСистемный язык пользователя — {{ $json?.massage?.from?.language_code }}. Сначала\nопредели язык текста пользователя, затем ответь на\nтом же языке. Добавь несколько подходящих эмодзи в свой ответ.",
+              "type": "string"
+            },
+            {
+              "id": "e1188a5d-d534-4180-8885-f857c3e131ad",
+              "name": "bot_typing",
+              "value": "={{ $json.massage.action === '/image' ? 'upload_photo' : 'typing' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        0
+      ],
+      "id": "45e8f17b-cc87-45c0-a18d-ef59f94e020c",
+      "name": "Settings"
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "action": "={{ $json.bot_typing }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        176
+      ],
+      "id": "66a007ec-9c37-4e4d-9ba9-2b422b4555a3",
+      "name": "Send a chat action",
+      "webhookId": "f3740c4c-5768-4bdb-bf8c-2c7a976373d8",
+      "credentials": {
+        "telegramApi": {
+          "id": "auc1IHwoB9MuIeWh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        544,
+        16
+      ],
+      "id": "e00f1afd-767d-44a2-899d-faf99c86762e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('PreProcessing').item.json.message.text }}",
+                    "rightValue": "/start",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "835a16b0-7187-4525-9ef8-f0811b502a76"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f34eabc7-be0a-4dda-b272-76542c137425",
+                    "leftValue": "={{ $('PreProcessing').item.json.message.text.split(' ')[0] }}",
+                    "rightValue": "/image",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        752,
+        16
+      ],
+      "id": "5239f777-b156-4911-9f1f-8a84e1c1dc25",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.system_command }}"
+            },
+            {
+              "content": "=Это первое сообщение от пользователя.\nПожалуйста, приветствуй нового пользователя:\nПривет, <b>друг</b>! 👋😊<br><br>\n<b>Что дальше?</b><br>\nЯ могу сгенерировать изображение по твоему запросу.<br>\nДля этого напиши /image ниже, допиши через пробел, какую картинку ты хочешь получить, и отправь сообщение.<br><br>\nНапример:<br>\n/image космический кот в скафандре, неоновый стиль, яркие цвета 🚀🐱✨<br><br>\n\n"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": "={{ $json.token_length }}",
+          "temperature": "={{ $json.model_temperature }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        960,
+        -48
+      ],
+      "id": "d8f576e2-c5d3-4bc6-ba11-8a4a6bd4ab30",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Scbz5DMazmBDduTj",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.message.content }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1312,
+        -48
+      ],
+      "id": "e00e36fc-4fa5-4402-bbf0-70c3b0246d82",
+      "name": "Send a text message",
+      "webhookId": "593ab19b-c09e-4c57-9a9c-d7956cb07d57",
+      "credentials": {
+        "telegramApi": {
+          "id": "auc1IHwoB9MuIeWh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "={{ $('PreProcessing').item.json.message.text }}",
+        "options": {
+          "dalleQuality": "standard",
+          "size": "1024x1024",
+          "returnImageUrls": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        976,
+        128
+      ],
+      "id": "13adaab6-1cac-485f-b8ae-f734f87ff4be",
+      "name": "Generate an image",
+      "credentials": {
+        "openAiApi": {
+          "id": "Scbz5DMazmBDduTj",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "file": "={{ $json.url }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1312,
+        128
+      ],
+      "id": "573d1c4e-bacc-4036-8d57-ab7ed2c1e588",
+      "name": "Send a photo message",
+      "webhookId": "2334e513-1664-44be-b4db-fe22fbfeb170",
+      "credentials": {
+        "telegramApi": {
+          "id": "auc1IHwoB9MuIeWh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "Извините, но мы не поддерживаем данный вид команды",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        976,
+        320
+      ],
+      "id": "55ec467e-f25b-4e75-a5b4-5249fcd6c6b8",
+      "name": "Send a text message1",
+      "webhookId": "d9f551ad-14ac-43d0-948c-7943b2f3a913",
+      "credentials": {
+        "telegramApi": {
+          "id": "auc1IHwoB9MuIeWh",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "PreProcessing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PreProcessing": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Send a chat action",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a chat action": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Send a photo message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c339eeef-0c1e-4f24-95ea-ea3870cf8c81",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6c4f7c432e45f665100b3116083e47a81f6e5dbbbeaa6d771aec5e71b3e4cfd7"
+  },
+  "id": "Lo4Qonvzmu0DKPIo",
+  "tags": []
+}

@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn.lock
+package-lock.json
+
+# Env / secrets
+.env
+.env.*
+*.local
+
+# n8n
+.n8n/
+backup/
