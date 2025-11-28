@@ -80,10 +80,10 @@ n8n-image-generator-bot/
 
 ## 📸 Скриншоты работы бота
 
-### Пример 1  
+### Пример 1
 ![Telegram Example](screenshots/examples/telegram_example_image.jpg)
 
-### Пример 2  
+### Пример 2
 ![Telegram Example](screenshots/examples/telegram_example_image1.jpg)
 
 ---
