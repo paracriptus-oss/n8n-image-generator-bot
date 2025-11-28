@@ -46,8 +46,8 @@ n8n-image-generator-bot/
 ├── screenshots/
 │   ├── workflow_overview.jpg
 │   ├── examples/
-│   │   ├── telegram_example_image.jpg
-│   │   └── telegram_example_image1.jpg
+│   │   ├── telegram_example_result_1.jpg
+│   │   └── telegram_example_result_2.jpg
 │   └── n8n/
 │       ├── generate_image_parameters.jpg
 │       ├── merge_choose_branch.jpg
@@ -66,7 +66,6 @@ n8n-image-generator-bot/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-```text
 ```
 
 ---
@@ -80,10 +79,10 @@ n8n-image-generator-bot/
 
 ## 📸 Скриншоты работы бота
 
-### Пример 1
+### Пример 1  
 ![Telegram Example](screenshots/examples/telegram_example_image.jpg)
 
-### Пример 2
+### Пример 2  
 ![Telegram Example](screenshots/examples/telegram_example_image1.jpg)
 
 ---
@@ -223,8 +222,8 @@ n8n-image-generator-bot/
 ├── screenshots/
 │   ├── workflow_overview.jpg
 │   ├── examples/
-│   │   ├── telegram_example_image.jpg
-│   │   └── telegram_example_image1.jpg
+│   │   ├── telegram_example_result_1.jpg
+│   │   └── telegram_example_result_2.jpg
 │   └── n8n/
 │       ├── generate_image_parameters.jpg
 │       ├── merge_choose_branch.jpg
@@ -243,7 +242,6 @@ n8n-image-generator-bot/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-```text
 ```
 
 ---
