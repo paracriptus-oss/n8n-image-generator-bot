@@ -66,6 +66,7 @@ n8n-image-generator-bot/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+```markdown
 
 ---
 
@@ -241,6 +242,7 @@ n8n-image-generator-bot/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+```markdown
 
 ---
 
