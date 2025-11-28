@@ -36,36 +36,35 @@ Telegram-бот на базе n8n и OpenAI (GPT + DALL·E 3)
 
 ---
 
-## 📂 Структура проекта
+## 📁 Структура проекта
 
+```text
 n8n-image-generator-bot/
-│
 ├── docs/
-│ └── overview-ru.md
-│
+│   ├── README.md
+│   └── overview-ru.md
 ├── screenshots/
-│ ├── workflow_overview.jpg
-│ ├── examples/
-│ │ ├── telegram_example_image.jpg
-│ │ └── telegram_example_image1.jpg
-│ │
-│ └── n8n/
-│ ├── generate_image_parameters.jpg
-│ ├── merge_choose_branch.jpg
-│ ├── message_model_options.jpg
-│ ├── message_model_parameters.jpg
-│ ├── message_model_prompt.jpg
-│ ├── preprocessing_parameters.jpg
-│ ├── send_photo_message.jpg
-│ ├── send_text_message.jpg
-│ ├── send_text_message_fallback.jpg
-│ ├── settings_parameters.jpg
-│ ├── switch_parameters.jpg
-│ └── telegram_trigger_parameters.jpg
-│
+│   ├── workflow_overview.jpg
+│   ├── examples/
+│   │   ├── telegram_example_image.jpg
+│   │   └── telegram_example_image1.jpg
+│   └── n8n/
+│       ├── generate_image_parameters.jpg
+│       ├── merge_choose_branch.jpg
+│       ├── message_model_options.jpg
+│       ├── message_model_parameters.jpg
+│       ├── message_model_prompt.jpg
+│       ├── preprocessing_parameters.jpg
+│       ├── send_photo_message.jpg
+│       ├── send_text_message.jpg
+│       ├── send_text_message_fallback.jpg
+│       ├── settings_parameters.jpg
+│       ├── switch_parameters.jpg
+│       └── telegram_trigger_parameters.jpg
 ├── workflows/
-│ └── image_generator_telegram_bot.json
-│
+│   └── image_generator_telegram_bot.json
+├── .gitignore
+├── LICENSE
 └── README.md
 
 ---
@@ -212,36 +211,35 @@ It processes commands, sends requests to OpenAI’s **DALL·E 3**, and returns h
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
+```text
 n8n-image-generator-bot/
-│
 ├── docs/
-│ └── overview-ru.md
-│
+│   ├── README.md
+│   └── overview-ru.md
 ├── screenshots/
-│ ├── workflow_overview.jpg
-│ ├── examples/
-│ │ ├── telegram_example_image.jpg
-│ │ └── telegram_example_image1.jpg
-│ │
-│ └── n8n/
-│ ├── generate_image_parameters.jpg
-│ ├── merge_choose_branch.jpg
-│ ├── message_model_options.jpg
-│ ├── message_model_parameters.jpg
-│ ├── message_model_prompt.jpg
-│ ├── preprocessing_parameters.jpg
-│ ├── send_photo_message.jpg
-│ ├── send_text_message.jpg
-│ ├── send_text_message_fallback.jpg
-│ ├── settings_parameters.jpg
-│ ├── switch_parameters.jpg
-│ └── telegram_trigger_parameters.jpg
-│
+│   ├── workflow_overview.jpg
+│   ├── examples/
+│   │   ├── telegram_example_image.jpg
+│   │   └── telegram_example_image1.jpg
+│   └── n8n/
+│       ├── generate_image_parameters.jpg
+│       ├── merge_choose_branch.jpg
+│       ├── message_model_options.jpg
+│       ├── message_model_parameters.jpg
+│       ├── message_model_prompt.jpg
+│       ├── preprocessing_parameters.jpg
+│       ├── send_photo_message.jpg
+│       ├── send_text_message.jpg
+│       ├── send_text_message_fallback.jpg
+│       ├── settings_parameters.jpg
+│       ├── switch_parameters.jpg
+│       └── telegram_trigger_parameters.jpg
 ├── workflows/
-│ └── image_generator_telegram_bot.json
-│
+│   └── image_generator_telegram_bot.json
+├── .gitignore
+├── LICENSE
 └── README.md
 
 ---
