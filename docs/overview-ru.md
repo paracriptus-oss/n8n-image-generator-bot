@@ -139,11 +139,11 @@
 
 ## 8. Примеры работы
 
-Примеры изображений и скриншоты интерфейса находятся в папке:
+Примеры изображений и скриншоты интерфейса находятся в папке `screenshots/`:
 
-/screenshots/
-
-
-(добавляются вручную после загрузки репозитория)
+- `screenshots/workflow_overview.jpg` — общая схема workflow
+- `screenshots/examples/telegram_example_image.jpg` — пример 1
+- `screenshots/examples/telegram_example_image1.jpg` — пример 2
+- `screenshots/n8n/*.jpg` — параметры всех узлов n8n
 
 ---
